@@ -23,7 +23,17 @@ public class EnemyController : MonoBehaviour
     {
       moveDirection = PlayerController.instance.transform.position - transform.position;
       anim.SetBool("isMoving", true);
-      
+
+      // flip
+      if (PlayerController.instance.transform.position.x < transform.position.x)
+      {
+        transform.localScale = Vector3.one;
+      }
+      else
+      {
+        transform.localScale = new Vector3(-1f, 1f, 1f);
+      }
+
     } else
     {
       moveDirection = Vector3.zero;
