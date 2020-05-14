@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
   public Rigidbody2D theRB;
   private Vector3 moveDirection;
   public float rangeToChasePlayer;
+  public Animator anim;
 
   // Start is called before the first frame update
   void Start()
@@ -21,10 +22,12 @@ public class EnemyController : MonoBehaviour
     if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
     {
       moveDirection = PlayerController.instance.transform.position - transform.position;
+      anim.SetBool("isMoving", true);
       
     } else
     {
       moveDirection = Vector3.zero;
+      anim.SetBool("isMoving", false);
     }
 
     moveDirection.Normalize();
