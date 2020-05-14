@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
   public float moveSpeed;
   public Rigidbody2D theRB;
-  private Vector3 moveDirection;
+  public Vector3 moveDirection;
   public float rangeToChasePlayer;
   public Animator anim;
 
