@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
   public float rangeToChasePlayer;
   public Animator anim;
   public int health = 150;
+  public GameObject[] deathSplatters;
 
   // Start is called before the first frame update
   void Start()
@@ -52,6 +53,11 @@ public class EnemyController : MonoBehaviour
     if(health <= 0)
     {
       Destroy(gameObject);
+
+      int deathSplatterIndex = Random.Range(0, deathSplatters.Length);
+      int rotationIndex = Random.Range(0, 4);
+
+      Instantiate(deathSplatters[deathSplatterIndex], transform.position, Quaternion.Euler(0f, 0f, 90F * rotationIndex));
     }
   }
 }
