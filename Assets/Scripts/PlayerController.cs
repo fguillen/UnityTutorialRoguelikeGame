@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour
 {
   public static PlayerController instance;
 
+  public float currentSpeed;
   public float moveSpeed;
   private Vector2 moveInput;
+  private Vector2 currentDirection;
   public Rigidbody2D theRB;
   public Animator anim;
   public GameObject bulletToBeFired;
@@ -18,6 +20,14 @@ public class PlayerController : MonoBehaviour
   private Camera theCam;
   public SpriteRenderer theBodySR;
 
+  // dashing
+  public float dashTime = .5f;
+  private float dashCounter = 0;
+  public float dashSpeed = 8f;
+  public float dashCoolDownTime = 1f;
+  private float dashCoolDownCounter = 0;
+  
+
   private void Awake()
   {
     instance = this;
@@ -27,19 +37,33 @@ public class PlayerController : MonoBehaviour
   void Start()
   {
     theCam = Camera.main;
-        
+    currentDirection = Vector2.zero;
+    currentSpeed = moveSpeed;
   }
+
+  private bool IsDashing()
+  {
+    return (dashCounter > 0);
+  }
+
+  private bool IsDashCoolingDown()
+  {
+    return (dashCoolDownCounter > 0);
+  }
+
 
   // Update is called once per frame
   void Update()
   {
-    moveInput.x = Input.GetAxisRaw("Horizontal");
-    moveInput.y = Input.GetAxisRaw("Vertical");
-    moveInput.Normalize();
+    if (!IsDashing()) {
+      currentDirection = DirectionController();
+    }
 
-    //transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
+    CheckDashing();
 
-    theRB.velocity = moveInput * moveSpeed;
+    //transform.position += new Vector3(moveInput.x * Time.deltaTime * currentSpeed, moveInput.y * Time.deltaTime * currentSpeed, 0f);
+
+    theRB.velocity = moveInput * currentSpeed;
 
     Vector3 mousePos = Input.mousePosition;
     Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
@@ -91,5 +115,43 @@ public class PlayerController : MonoBehaviour
       anim.SetBool("isMoving", false);
     }
  
+  }
+
+  public void CheckDashing()
+  {
+    if (!IsDashing() && !IsDashCoolingDown())
+    {
+      if (Input.GetKeyDown(KeyCode.Space))
+      {
+        dashCounter = dashTime;
+        currentDirection = DirectionController();
+        currentSpeed = dashSpeed;
+      }
+    }
+
+    if (IsDashing())
+    {
+      dashCounter -= Time.deltaTime;
+
+      if(dashCounter <= 0)
+      {
+        currentSpeed = moveSpeed;
+        dashCoolDownCounter = dashCoolDownTime;
+      }
+    }
+
+    if (IsDashCoolingDown())
+    {
+      dashCoolDownCounter -= Time.deltaTime;
+    }
+  }
+
+  public Vector2 DirectionController()
+  {
+    moveInput.x = Input.GetAxisRaw("Horizontal");
+    moveInput.y = Input.GetAxisRaw("Vertical");
+    moveInput.Normalize();
+
+    return moveInput;
   }
 }

@@ -1021,6 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b65009eed45d4d24956cb644f71fa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpeed: 0
   moveSpeed: 5
   theRB: {fileID: 906620834}
   anim: {fileID: 906620836}
@@ -1030,6 +1031,9 @@ MonoBehaviour:
   timeBetweenShots: 0.2
   gunArm: {fileID: 1796866236}
   theBodySR: {fileID: 274741062}
+  dashTime: 0.5
+  dashSpeed: 8
+  dashCoolDownTime: 1
 --- !u!4 &906620833
 Transform:
   m_ObjectHideFlags: 0
