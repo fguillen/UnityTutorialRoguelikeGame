@@ -95,6 +95,8 @@ MonoBehaviour:
   firePoint: {fileID: 2306365467305403159}
   bullet: {fileID: 7425061570461397401, guid: 8b01f3c3a32aa40139fa00e1dbe28cf4, type: 3}
   fireRate: 1
+  theBody: {fileID: 5700512580871338554}
+  rangeShoot: 10
 --- !u!61 &5700512579498708839
 BoxCollider2D:
   m_ObjectHideFlags: 0

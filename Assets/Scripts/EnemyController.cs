@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
   public GameObject bullet;
   public float fireRate;
   private float fireCounter;
+  public SpriteRenderer theBody;
+  public float rangeShoot;
 
   // Start is called before the first frame update
   void Start()
@@ -27,40 +29,58 @@ public class EnemyController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
+    if (theBody.isVisible)
     {
-      moveDirection = PlayerController.instance.transform.position - transform.position;
-      anim.SetBool("isMoving", true);
-
-      // flip
-      if (PlayerController.instance.transform.position.x < transform.position.x)
+      // Chasing
+      if (distanceToPlayer() < rangeToChasePlayer)
       {
-        transform.localScale = Vector3.one;
+        moveDirection = PlayerController.instance.transform.position - transform.position;
+
+        // flip
+        if (PlayerController.instance.transform.position.x < transform.position.x)
+        {
+          transform.localScale = Vector3.one;
+        }
+        else
+        {
+          transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
       }
       else
       {
-        transform.localScale = new Vector3(-1f, 1f, 1f);
+        moveDirection = Vector3.zero;
       }
 
-    } else
+      moveDirection.Normalize();
+      theRB.velocity = moveDirection * moveSpeed;
+
+      // Shooting
+      if (shouldShoot && (distanceToPlayer() < rangeShoot))
+      {
+        fireCounter -= Time.deltaTime;
+        if (fireCounter <= 0)
+        {
+          Instantiate(bullet, firePoint.position, firePoint.rotation);
+          fireCounter = fireRate;
+        }
+      }
+    }
+
+    // isMoving?
+    if(moveDirection != Vector3.zero)
     {
-      moveDirection = Vector3.zero;
+      anim.SetBool("isMoving", true);
+    }
+    else
+    {
       anim.SetBool("isMoving", false);
     }
+  }
 
-    moveDirection.Normalize();
-    theRB.velocity = moveDirection * moveSpeed;
-
-    // Shooting
-    if (shouldShoot)
-    {
-      fireCounter -= Time.deltaTime;
-      if(fireCounter <= 0)
-      {
-        Instantiate(bullet, firePoint.position, firePoint.rotation);
-        fireCounter = fireRate;
-      }
-    }
+  private float distanceToPlayer()
+  {
+    return Vector3.Distance(transform.position, PlayerController.instance.transform.position);
   }
 
   public void DamageEnemy(int damage)
