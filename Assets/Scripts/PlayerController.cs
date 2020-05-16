@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
         dashCounter = dashTime;
         currentDirection = DirectionController();
         currentSpeed = dashSpeed;
+        anim.SetTrigger("dash");
       }
     }
 
