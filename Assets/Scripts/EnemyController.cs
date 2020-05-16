@@ -11,6 +11,12 @@ public class EnemyController : MonoBehaviour
   public Animator anim;
   public int health = 150;
   public GameObject[] deathSplatters;
+  public GameObject bleedingEffect;
+  public bool shouldShoot;
+  public Transform firePoint;
+  public GameObject bullet;
+  public float fireRate;
+  private float fireCounter;
 
   // Start is called before the first frame update
   void Start()
@@ -44,11 +50,24 @@ public class EnemyController : MonoBehaviour
 
     moveDirection.Normalize();
     theRB.velocity = moveDirection * moveSpeed;
+
+    // Shooting
+    if (shouldShoot)
+    {
+      fireCounter -= Time.deltaTime;
+      if(fireCounter <= 0)
+      {
+        Instantiate(bullet, firePoint.position, firePoint.rotation);
+        fireCounter = fireRate;
+      }
+    }
   }
 
   public void DamageEnemy(int damage)
   {
     health -= damage;
+
+    Instantiate(bleedingEffect, transform.position, transform.rotation);
 
     if(health <= 0)
     {

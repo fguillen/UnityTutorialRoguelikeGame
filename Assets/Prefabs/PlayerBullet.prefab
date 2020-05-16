@@ -98,6 +98,8 @@ MonoBehaviour:
   speed: 7.5
   bulletImpactEffect: {fileID: 802567118581329818, guid: 870d47634463841b1b76617553482fc0,
     type: 3}
+  bulletEnemyEffect: {fileID: 7190219392510617062, guid: 1e4ae8befa69b45b2a590d1755bb06e2,
+    type: 3}
   damageToGive: 50
 --- !u!61 &4642462416625584699
 BoxCollider2D:
