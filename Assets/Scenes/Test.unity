@@ -1009,6 +1009,7 @@ MonoBehaviour:
   firePoint: {fileID: 1727659923}
   timeBetweenShots: 0.2
   gunArm: {fileID: 1796866236}
+  theBodySR: {fileID: 274741062}
 --- !u!4 &906620833
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,6 +1292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenHealth: 0
   maxHealth: 5
+  invicTime: 1
 --- !u!4 &1232157884
 Transform:
   m_ObjectHideFlags: 0

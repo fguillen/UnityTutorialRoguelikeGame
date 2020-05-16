@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
   private float shotCounter;
   public Transform gunArm;
   private Camera theCam;
+  public SpriteRenderer theBodySR;
 
   private void Awake()
   {
