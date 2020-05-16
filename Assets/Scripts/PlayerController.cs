@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
   public float dashSpeed = 8f;
   public float dashCoolDownTime = 1f;
   private float dashCoolDownCounter = 0;
+  public float dashInvincibleTime = .5f;
+
+  // invincible
+  private float invincibleCounter = 0f;
   
 
   private void Awake()
@@ -60,6 +64,7 @@ public class PlayerController : MonoBehaviour
     }
 
     CheckDashing();
+    CheckInvincible();
 
     //transform.position += new Vector3(moveInput.x * Time.deltaTime * currentSpeed, moveInput.y * Time.deltaTime * currentSpeed, 0f);
 
@@ -127,6 +132,7 @@ public class PlayerController : MonoBehaviour
         currentDirection = DirectionController();
         currentSpeed = dashSpeed;
         anim.SetTrigger("dash");
+        MakeInvincible(dashInvincibleTime);
       }
     }
 
@@ -154,5 +160,33 @@ public class PlayerController : MonoBehaviour
     moveInput.Normalize();
 
     return moveInput;
+  }
+
+  public bool IsInvincible()
+  {
+    return(invincibleCounter > 0);
+  }
+
+  public void MakeInvincible(float time)
+  {
+    invincibleCounter = time;
+    theBodySR.color = new Color(theBodySR.color.r, theBodySR.color.g, theBodySR.color.b, 0.5f);
+  }
+
+  private void RemoveInvicible()
+  {
+    theBodySR.color = new Color(theBodySR.color.r, theBodySR.color.g, theBodySR.color.b, 1f);
+  }
+
+  public void CheckInvincible()
+  {
+    if(IsInvincible())
+    {
+      invincibleCounter -= Time.deltaTime;
+      if(invincibleCounter <= 0)
+      {
+        RemoveInvicible();
+      }
+    }
   }
 }
