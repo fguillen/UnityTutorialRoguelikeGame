@@ -25,8 +25,10 @@ public class EnemyBulletController : MonoBehaviour
     if(other.tag == "Player")
     {
       // damage Player
-      Destroy(gameObject);
+      
     }
+
+    Destroy(gameObject);
   }
 
   private void OnBecameInvisible()
