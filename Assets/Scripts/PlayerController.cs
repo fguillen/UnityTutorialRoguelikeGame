@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     currentSpeed = moveSpeed;
   }
 
-  private bool IsDashing()
+  public bool IsDashing()
   {
     return (dashCounter > 0);
   }
