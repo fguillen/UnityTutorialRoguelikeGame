@@ -93,8 +93,8 @@ MonoBehaviour:
     type: 3}
   shouldShoot: 1
   firePoint: {fileID: 2306365467305403159}
-  bullet: {fileID: 4008620592265674440, guid: 2693104db294a4f7ca88bcc0cb9a5383, type: 3}
-  fireRate: 0.5
+  bullet: {fileID: 7425061570461397401, guid: 8b01f3c3a32aa40139fa00e1dbe28cf4, type: 3}
+  fireRate: 1
 --- !u!61 &5700512579498708839
 BoxCollider2D:
   m_ObjectHideFlags: 0
