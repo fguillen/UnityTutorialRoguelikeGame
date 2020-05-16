@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
   public static UIController instance;
   public Slider healthSlider;
+  public GameObject deathScreen;
   public Text healthText;
   private int maxHealth;
   private int currentHealth;
@@ -26,6 +27,11 @@ public class UIController : MonoBehaviour
   {
     currentHealth = value;
     renderHealth();
+  }
+
+  public void ActivateDeathScreen()
+  {
+    deathScreen.SetActive(true);
   }
 
   private void renderHealth()

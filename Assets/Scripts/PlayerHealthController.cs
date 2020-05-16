@@ -33,6 +33,7 @@ public class PlayerHealthController : MonoBehaviour
     if(currenHealth <= 0)
     {
       PlayerController.instance.gameObject.SetActive(false);
+      UIController.instance.ActivateDeathScreen();
     }
 
     UIController.instance.SetCurrentHealth(currenHealth);

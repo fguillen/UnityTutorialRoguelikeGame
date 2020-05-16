@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (theBody.isVisible)
+    if (theBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
     {
       // Chasing
       if (distanceToPlayer() < rangeToChasePlayer)
@@ -65,6 +65,10 @@ public class EnemyController : MonoBehaviour
           fireCounter = fireRate;
         }
       }
+    } else
+    {
+      moveDirection = Vector3.zero;
+      theRB.velocity = moveDirection * moveSpeed;
     }
 
     // isMoving?

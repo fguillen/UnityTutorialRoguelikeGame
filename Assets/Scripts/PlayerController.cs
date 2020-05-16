@@ -14,9 +14,7 @@ public class PlayerController : MonoBehaviour
   public Transform firePoint;
   public float timeBetweenShots;
   private float shotCounter;
-
   public Transform gunArm;
-
   private Camera theCam;
 
   private void Awake()
