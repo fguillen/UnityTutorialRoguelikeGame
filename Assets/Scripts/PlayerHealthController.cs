@@ -17,6 +17,8 @@ public class PlayerHealthController : MonoBehaviour
   void Start()
   {
     currenHealth = maxHealth;
+    UIController.instance.SetMaxHealth(maxHealth);
+    UIController.instance.SetCurrentHealth(currenHealth);
   }
 
   // Update is called once per frame
@@ -32,5 +34,7 @@ public class PlayerHealthController : MonoBehaviour
     {
       PlayerController.instance.gameObject.SetActive(false);
     }
+
+    UIController.instance.SetCurrentHealth(currenHealth);
   }
 }
