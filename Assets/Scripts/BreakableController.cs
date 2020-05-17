@@ -6,7 +6,7 @@ public class BreakableController : MonoBehaviour
 {
   public GameObject[] pieces;
   public GameObject[] pickupsToDrop;
-  public float percentageOfChancesToDrop = .3f;
+  public float percentageOfChancesToDrop = .2f;
   public int health = 2;
 
   // Start is called before the first frame update
@@ -55,8 +55,13 @@ public class BreakableController : MonoBehaviour
 
   private void DropPickup()
   {
-    bool dropPickup = (Random.Range(0f, 1f) > percentageOfChancesToDrop);
-    if(dropPickup)
+    float chances = Random.Range(0f, 1f);
+    bool dropPickup = (chances < percentageOfChancesToDrop);
+
+    Debug.Log("chances: " + chances.ToString());
+    Debug.Log("dropPickup: " + dropPickup.ToString());
+
+    if (dropPickup)
     {
       int pickupIndex = Random.Range(0, pickupsToDrop.Length);
       GameObject pickup = pickupsToDrop[pickupIndex];

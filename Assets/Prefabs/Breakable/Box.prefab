@@ -130,7 +130,8 @@ MonoBehaviour:
   pickupsToDrop:
   - {fileID: 8757826085624143656, guid: ef1e22bdc44ff4a90b7cc51aa6630d55, type: 3}
   - {fileID: 7656501240909027998, guid: 4c826c91b855a4e56b03696c332555cb, type: 3}
-  percentageOfChancesToDrop: 0.3
+  percentageOfChancesToDrop: 0.2
+  health: 2
 --- !u!114 &114838565363769720
 MonoBehaviour:
   m_ObjectHideFlags: 0
