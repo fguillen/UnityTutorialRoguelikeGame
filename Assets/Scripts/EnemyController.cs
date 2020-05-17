@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-        
+
   }
 
   // Update is called once per frame
@@ -65,14 +65,15 @@ public class EnemyController : MonoBehaviour
           fireCounter = fireRate;
         }
       }
-    } else
+    }
+    else
     {
       moveDirection = Vector3.zero;
       theRB.velocity = moveDirection * moveSpeed;
     }
 
     // isMoving?
-    if(moveDirection != Vector3.zero)
+    if (moveDirection != Vector3.zero)
     {
       anim.SetBool("isMoving", true);
     }
@@ -89,18 +90,27 @@ public class EnemyController : MonoBehaviour
 
   public void DamageEnemy(int damage)
   {
+    AudioManager.instance.playSFX("Enemy Hurt");
+
     health -= damage;
 
     Instantiate(bleedingEffect, transform.position, transform.rotation);
 
-    if(health <= 0)
+    if (health <= 0)
     {
-      Destroy(gameObject);
-
-      int deathSplatterIndex = Random.Range(0, deathSplatters.Length);
-      int rotationIndex = Random.Range(0, 4);
-
-      Instantiate(deathSplatters[deathSplatterIndex], transform.position, Quaternion.Euler(0f, 0f, 90F * rotationIndex));
+      Death();
     }
+  }
+
+  private void Death()
+  {
+    AudioManager.instance.playSFX("Enemy Death");
+
+    Destroy(gameObject);
+
+    int deathSplatterIndex = Random.Range(0, deathSplatters.Length);
+    int rotationIndex = Random.Range(0, 4);
+
+    Instantiate(deathSplatters[deathSplatterIndex], transform.position, Quaternion.Euler(0f, 0f, 90F * rotationIndex));
   }
 }

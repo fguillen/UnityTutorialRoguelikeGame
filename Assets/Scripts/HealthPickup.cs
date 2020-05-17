@@ -36,8 +36,14 @@ public class HealthPickup : MonoBehaviour
   {
     if (other.CompareTag("Player") && !IsIdle())
     {
-      PlayerHealthController.instance.HealPlayer(healAmount);
-      Destroy(gameObject);
+      Pickup();
     }
+  }
+
+  private void Pickup()
+  {
+    AudioManager.instance.playSFX("Pickup Health");
+    PlayerHealthController.instance.HealPlayer(healAmount);
+    Destroy(gameObject);
   }
 }

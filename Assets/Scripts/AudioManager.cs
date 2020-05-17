@@ -10,17 +10,35 @@ public class AudioManager : MonoBehaviour
   public AudioSource gameOverMusic;
   public AudioSource gameMusic;
 
+  public AudioSource[] sfxs;
+  private Hashtable sfxsTable;
+
   // Start is called before the first frame update
   void Start()
   {
     instance = this;
+
+    sfxsTable = new Hashtable();
+    foreach (AudioSource audioSource in sfxs)
+    {
+      sfxsTable.Add(audioSource.name, audioSource);
+    }
   }
+
+  public void playSFX(string name)
+  {
+    AudioSource sfx = (AudioSource)sfxsTable[name];
+    sfx.Stop();
+    sfx.Play();
+  }
+
 
   // Update is called once per frame
   void Update()
   {
         
   }
+
 
   public void PlayWinMusic()
   {

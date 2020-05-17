@@ -31,6 +31,8 @@ public class BreakableController : MonoBehaviour
 
   private void Break()
   {
+    AudioManager.instance.playSFX("Box Breaking");
+
     Destroy(gameObject);
 
     int piecesCount = Random.Range(1, pieces.Length);

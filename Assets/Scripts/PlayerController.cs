@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
     {
       if (Input.GetKeyDown(KeyCode.Space))
       {
+        AudioManager.instance.playSFX("Player Dash");
         dashCounter = dashTime;
         currentDirection = DirectionController();
         currentSpeed = dashSpeed;

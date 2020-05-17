@@ -10,6 +10,7 @@ public class EnemyBulletController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    AudioManager.instance.playSFX("Shoot1");
     direction = PlayerController.instance.transform.position - transform.position;
     direction.Normalize();
   }

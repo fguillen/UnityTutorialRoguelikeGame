@@ -30,8 +30,12 @@ public class PlayerHealthController : MonoBehaviour
 
   public void DamagePlayer()
   {
+    
+
     if (!PlayerController.instance.IsInvincible())
     {
+      AudioManager.instance.playSFX("Player Hurt");
+
       PlayerController.instance.MakeInvincible(invincibleTime);
 
       currenHealth--;
@@ -46,6 +50,7 @@ public class PlayerHealthController : MonoBehaviour
 
   public void PlayerDeath()
   {
+    AudioManager.instance.playSFX("Player Death");
     PlayerController.instance.gameObject.SetActive(false);
     UIController.instance.ActivateDeathScreen();
     AudioManager.instance.PlayGameOverMusic();

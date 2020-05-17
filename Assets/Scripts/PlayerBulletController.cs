@@ -13,7 +13,7 @@ public class PlayerBulletController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-        
+    AudioManager.instance.playSFX("Shoot2");  
   }
 
   // Update is called once per frame
@@ -25,7 +25,6 @@ public class PlayerBulletController : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
-    
     Destroy(gameObject);
 
     if (other.tag == "Enemy")
@@ -34,6 +33,7 @@ public class PlayerBulletController : MonoBehaviour
       Instantiate(bulletEnemyEffect, transform.position, transform.rotation);
     } else
     {
+      AudioManager.instance.playSFX("Impact");
       Instantiate(bulletImpactEffect, transform.position, transform.rotation);
     }
   }
