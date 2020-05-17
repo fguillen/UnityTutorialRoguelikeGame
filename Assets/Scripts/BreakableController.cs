@@ -5,6 +5,8 @@ using UnityEngine;
 public class BreakableController : MonoBehaviour
 {
   public GameObject[] pieces;
+  public GameObject[] pickupsToDrop;
+  public float percentageOfChancesToDrop = .3f;
 
   // Start is called before the first frame update
   void Start()
@@ -23,6 +25,7 @@ public class BreakableController : MonoBehaviour
     if (other.CompareTag("Player") && PlayerController.instance.IsDashing())
     {
       Break();
+      DropPickup();
     }
   }
 
@@ -35,6 +38,18 @@ public class BreakableController : MonoBehaviour
     {
       int pieceIndex = Random.Range(0, pieces.Length);
       Instantiate(pieces[pieceIndex], transform.position, transform.rotation);
+    }
+  }
+
+  private void DropPickup()
+  {
+    bool dropPickup = (Random.Range(0f, 1f) > percentageOfChancesToDrop);
+    if(dropPickup)
+    {
+      int pickupIndex = Random.Range(0, pickupsToDrop.Length);
+      GameObject pickup = pickupsToDrop[pickupIndex];
+
+      Instantiate(pickup, transform.position, transform.rotation);
     }
   }
 }

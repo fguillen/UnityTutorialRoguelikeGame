@@ -127,6 +127,10 @@ MonoBehaviour:
   - {fileID: 820293394633610220, guid: e897d31806b1c41788f1401f807ed14b, type: 3}
   - {fileID: 4004348177936549026, guid: cb6def095bd3244e2a239176b810bae3, type: 3}
   - {fileID: 3314627294578584103, guid: b4fa920a04b1445b299c456979c786c0, type: 3}
+  pickupsToDrop:
+  - {fileID: 8757826085624143656, guid: ef1e22bdc44ff4a90b7cc51aa6630d55, type: 3}
+  - {fileID: 7656501240909027998, guid: 4c826c91b855a4e56b03696c332555cb, type: 3}
+  percentageOfChancesToDrop: 0.3
 --- !u!114 &114838565363769720
 MonoBehaviour:
   m_ObjectHideFlags: 0
