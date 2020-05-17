@@ -37,12 +37,18 @@ public class PlayerHealthController : MonoBehaviour
       currenHealth--;
       if (currenHealth <= 0)
       {
-        PlayerController.instance.gameObject.SetActive(false);
-        UIController.instance.ActivateDeathScreen();
+        PlayerDeath();
       }
 
       UIController.instance.SetCurrentHealth(currenHealth);
     }
+  }
+
+  public void PlayerDeath()
+  {
+    PlayerController.instance.gameObject.SetActive(false);
+    UIController.instance.ActivateDeathScreen();
+    AudioManager.instance.PlayGameOverMusic();
   }
 
   public void HealPlayer(int amount)
