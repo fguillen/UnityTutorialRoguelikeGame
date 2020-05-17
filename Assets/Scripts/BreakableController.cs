@@ -7,6 +7,7 @@ public class BreakableController : MonoBehaviour
   public GameObject[] pieces;
   public GameObject[] pickupsToDrop;
   public float percentageOfChancesToDrop = .3f;
+  public int health = 2;
 
   // Start is called before the first frame update
   void Start()
@@ -25,7 +26,14 @@ public class BreakableController : MonoBehaviour
     if (other.CompareTag("Player") && PlayerController.instance.IsDashing())
     {
       Break();
-      DropPickup();
+      
+    } else if (other.CompareTag("PlayerBullet"))
+    {
+      health--;
+      if(health <= 0)
+      {
+        Break();
+      }
     }
   }
 
@@ -41,6 +49,8 @@ public class BreakableController : MonoBehaviour
       int pieceIndex = Random.Range(0, pieces.Length);
       Instantiate(pieces[pieceIndex], transform.position, transform.rotation);
     }
+
+    DropPickup();
   }
 
   private void DropPickup()
