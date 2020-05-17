@@ -58,9 +58,6 @@ public class BreakableController : MonoBehaviour
     float chances = Random.Range(0f, 1f);
     bool dropPickup = (chances < percentageOfChancesToDrop);
 
-    Debug.Log("chances: " + chances.ToString());
-    Debug.Log("dropPickup: " + dropPickup.ToString());
-
     if (dropPickup)
     {
       int pickupIndex = Random.Range(0, pickupsToDrop.Length);

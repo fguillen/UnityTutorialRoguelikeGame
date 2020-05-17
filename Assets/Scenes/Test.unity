@@ -693,7 +693,7 @@ PrefabInstance:
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}
@@ -1920,7 +1920,7 @@ PrefabInstance:
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_Tiles.Array.data[54].second.m_TileSpriteIndex
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
@@ -1941,14 +1941,13 @@ PrefabInstance:
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_Data
       value: 
-      objectReference: {fileID: 21300010, guid: fffd7cf32ae20e84cba373590dd03da4,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_RefCount
@@ -1972,7 +1971,7 @@ PrefabInstance:
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3715758684840069269, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
@@ -2211,7 +2210,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300010, guid: fffd7cf32ae20e84cba373590dd03da4,
+        type: 3}
     - target: {fileID: 3715758685332701081, guid: 007e3a972f49d48f8a99290b212ed214,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5878,6 +5878,7 @@ MonoBehaviour:
   timeBetweenShots: 0.2
   gunArm: {fileID: 1796866236}
   theBodySR: {fileID: 274741062}
+  controller: mouse
   dashTime: 0.5
   dashSpeed: 8
   dashCoolDownTime: 1
@@ -6974,7 +6975,7 @@ PrefabInstance:
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}
@@ -8423,7 +8424,7 @@ PrefabInstance:
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 298814600172086085, guid: 315e947865ff0490d9bab38ebdaad0cc,
         type: 3}

@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
 
   public float currentSpeed;
   public float moveSpeed;
-  private Vector2 moveInput;
-  private Vector2 currentDirection;
+  private Vector2 moveDirection;
   public Rigidbody2D theRB;
   public Animator anim;
   public GameObject bulletToBeFired;
@@ -19,6 +18,7 @@ public class PlayerController : MonoBehaviour
   public Transform gunArm;
   private Camera theCam;
   public SpriteRenderer theBodySR;
+  public string controller = "cursor";
 
   // dashing
   public float dashTime = .5f;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
   void Start()
   {
     theCam = Camera.main;
-    currentDirection = Vector2.zero;
+    moveDirection = Vector2.zero;
     currentSpeed = moveSpeed;
   }
 
@@ -60,22 +60,22 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     if (!IsDashing()) {
-      currentDirection = DirectionController();
+      moveDirection = MoveDirection();
     }
 
     CheckDashing();
     CheckInvincible();
 
-    //transform.position += new Vector3(moveInput.x * Time.deltaTime * currentSpeed, moveInput.y * Time.deltaTime * currentSpeed, 0f);
 
-    theRB.velocity = moveInput * currentSpeed;
+    theRB.velocity = moveDirection * currentSpeed;
 
-    Vector3 mousePos = Input.mousePosition;
-    Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+
+
+    Vector2 gunDirection = GunDirection();
 
     // flip Player
 
-    if(mousePos.x < screenPoint.x)
+    if (gunDirection.x < 0)
     {
       transform.localScale = new Vector3(-1f, 1f, 1f);
       gunArm.localScale = new Vector3(-1f, -1f, 1f);
@@ -89,30 +89,29 @@ public class PlayerController : MonoBehaviour
 
 
 
-    if (Input.GetMouseButtonDown(0))
+    if (ShootButtonDown())
     {
-      Instantiate(bulletToBeFired, firePoint.position, firePoint.rotation);
-      shotCounter = timeBetweenShots;
+      Shoot();
     }
 
-    if (Input.GetMouseButton(0))
+    if (ShootButton())
     {
       shotCounter -= Time.deltaTime;
 
       if(shotCounter <= 0)
       {
-        Instantiate(bulletToBeFired, firePoint.position, firePoint.rotation);
-        shotCounter = timeBetweenShots;
+        Shoot();
       }
     }
 
 
     // rotate gum arm
-    Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
-    float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+    
+    float angle = Mathf.Atan2(gunDirection.y, gunDirection.x) * Mathf.Rad2Deg;
+
     gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
-    if(moveInput != Vector2.zero)
+    if(moveDirection != Vector2.zero)
     {
       anim.SetBool("isMoving", true);
     } else
@@ -122,15 +121,63 @@ public class PlayerController : MonoBehaviour
  
   }
 
+  private bool ShootButtonDown()
+  { 
+    if (controller == "mouse")
+    {
+      return Input.GetMouseButtonDown(0);
+    }
+    else if (controller == "cursor")
+    {
+      return Input.GetKeyDown(KeyCode.Space);
+    }
+
+    return false;
+  }
+
+  private bool ShootButton()
+  { 
+    if (controller == "mouse")
+    {
+      return Input.GetMouseButton(0);
+    }
+    else if (controller == "cursor")
+    {
+      return Input.GetKey(KeyCode.Space);
+    }
+
+    return false;
+  }
+
+  private void Shoot()
+  {
+    Instantiate(bulletToBeFired, firePoint.position, firePoint.rotation);
+    shotCounter = timeBetweenShots;
+  }
+
+  private bool DashButtonDown()
+  {
+    if (controller == "mouse")
+    {
+      return Input.GetKey(KeyCode.Space);
+    }
+    else if (controller == "cursor")
+    {
+      return Input.GetKey(KeyCode.C);
+    }
+
+    return false;
+  }
+
   public void CheckDashing()
   {
     if (!IsDashing() && !IsDashCoolingDown())
     {
-      if (Input.GetKeyDown(KeyCode.Space))
+      if (DashButtonDown())
       {
         AudioManager.instance.playSFX("Player Dash");
         dashCounter = dashTime;
-        currentDirection = DirectionController();
+        moveDirection = MoveDirection();
         currentSpeed = dashSpeed;
         anim.SetTrigger("dash");
         MakeInvincible(dashInvincibleTime);
@@ -154,13 +201,49 @@ public class PlayerController : MonoBehaviour
     }
   }
 
-  public Vector2 DirectionController()
+  public Vector2 MoveDirection()
   {
+    if(controller == "mouse")
+    {
+      return MoveDirectionMouseController();
+    } else if (controller == "cursor")
+    {
+      return MoveDirectionMouseController();
+    }
+
+    return new Vector2();
+  }
+
+  private Vector2 GunDirection()
+  {
+    if (controller == "mouse")
+    {
+      return GunDirectionMouseController();
+    }
+    else if (controller == "cursor")
+    {
+      return MoveDirectionMouseController();
+    }
+
+    return new Vector2();
+  }
+
+  private Vector2 MoveDirectionMouseController()
+  {
+    Vector2 moveInput = new Vector2();
     moveInput.x = Input.GetAxisRaw("Horizontal");
     moveInput.y = Input.GetAxisRaw("Vertical");
     moveInput.Normalize();
 
     return moveInput;
+  }
+
+  private Vector2 GunDirectionMouseController()
+  {
+    Vector3 mousePos = Input.mousePosition;
+    Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+    Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
+    return offset;
   }
 
   public bool IsInvincible()
