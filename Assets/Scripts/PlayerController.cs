@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
   public static PlayerController instance;
+
+  Gamepad gamepad;
 
   public float currentSpeed;
   public float moveSpeed;
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
   private void Awake()
   {
+    gamepad = Gamepad.current;
     instance = this;
   }
 
@@ -55,10 +59,34 @@ public class PlayerController : MonoBehaviour
     return (dashCoolDownCounter > 0);
   }
 
+  private void ListenController()
+  {
+    if (gamepad == null)
+    {
+      Debug.Log("Pad NOT found");
+      return; // No gamepad connected.
+    } else
+    {
+      Debug.Log("Pad found: " + gamepad);
+    }
+
+    if (gamepad.rightTrigger.wasPressedThisFrame)
+    {
+      Debug.Log("gamepad.rightTrigger.wasPressedThisFrame");
+    }
+
+    Vector2 move = gamepad.leftStick.ReadValue();
+    Debug.Log("lefStick: " + move);
+  }
+
+
+
 
   // Update is called once per frame
   void Update()
   {
+    ListenController();
+
     if (!IsDashing()) {
       moveDirection = MoveDirection();
     }
@@ -122,31 +150,22 @@ public class PlayerController : MonoBehaviour
   }
 
   private bool ShootButtonDown()
-  { 
-    if (controller == "mouse")
-    {
-      return Input.GetMouseButtonDown(0);
-    }
-    else if (controller == "cursor")
-    {
-      return Input.GetKeyDown(KeyCode.Space);
-    }
-
-    return false;
+  {
+    return (
+      Input.GetMouseButtonDown(0) ||
+      Input.GetKeyDown(KeyCode.Space) ||
+      gamepad.rightTrigger.wasPressedThisFrame
+    );
   }
 
   private bool ShootButton()
-  { 
-    if (controller == "mouse")
-    {
-      return Input.GetMouseButton(0);
-    }
-    else if (controller == "cursor")
-    {
-      return Input.GetKey(KeyCode.Space);
-    }
+  {
 
-    return false;
+    return (
+      Input.GetMouseButton(0) ||
+      Input.GetKey(KeyCode.Space) ||
+      gamepad.rightTrigger.isPressed
+    );
   }
 
   private void Shoot()
@@ -157,16 +176,11 @@ public class PlayerController : MonoBehaviour
 
   private bool DashButtonDown()
   {
-    if (controller == "mouse")
-    {
-      return Input.GetKey(KeyCode.Space);
-    }
-    else if (controller == "cursor")
-    {
-      return Input.GetKey(KeyCode.C);
-    }
-
-    return false;
+    return (
+      Input.GetKey(KeyCode.Space) ||
+      Input.GetKey(KeyCode.C) ||
+      gamepad.leftTrigger.wasPressedThisFrame
+    );
   }
 
   public void CheckDashing()
@@ -203,15 +217,12 @@ public class PlayerController : MonoBehaviour
 
   public Vector2 MoveDirection()
   {
-    if(controller == "mouse")
-    {
-      return MoveDirectionMouseController();
-    } else if (controller == "cursor")
-    {
-      return MoveDirectionMouseController();
-    }
+    Vector2 moveInput = new Vector2();
+    moveInput.x = Input.GetAxisRaw("Horizontal");
+    moveInput.y = Input.GetAxisRaw("Vertical");
+    moveInput.Normalize();
 
-    return new Vector2();
+    return moveInput;
   }
 
   private Vector2 GunDirection()
@@ -222,20 +233,20 @@ public class PlayerController : MonoBehaviour
     }
     else if (controller == "cursor")
     {
-      return MoveDirectionMouseController();
+      return MoveDirection();
+    } else if (controller == "pad")
+    {
+      return GunDirectionPadController();
     }
 
     return new Vector2();
   }
 
-  private Vector2 MoveDirectionMouseController()
+  private Vector2 GunDirectionPadController()
   {
-    Vector2 moveInput = new Vector2();
-    moveInput.x = Input.GetAxisRaw("Horizontal");
-    moveInput.y = Input.GetAxisRaw("Vertical");
-    moveInput.Normalize();
+    Vector2 move = gamepad.rightStick.ReadValue();
 
-    return moveInput;
+    return move;
   }
 
   private Vector2 GunDirectionMouseController()
