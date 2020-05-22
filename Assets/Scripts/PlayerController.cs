@@ -59,33 +59,9 @@ public class PlayerController : MonoBehaviour
     return (dashCoolDownCounter > 0);
   }
 
-  private void ListenController()
-  {
-    if (gamepad == null)
-    {
-      Debug.Log("Pad NOT found");
-      return; // No gamepad connected.
-    } else
-    {
-      Debug.Log("Pad found: " + gamepad);
-    }
-
-    if (gamepad.rightShoulder.wasPressedThisFrame)
-    {
-      Debug.Log("gamepad.rightShoulder.wasPressedThisFrame");
-    }
-
-    Vector2 move = gamepad.leftStick.ReadValue();
-    Debug.Log("lefStick: " + move);
-  }
-
-
-
-
   // Update is called once per frame
   void Update()
   {
-    ListenController();
 
     if (!IsDashing()) {
       moveDirection = MoveDirection();
