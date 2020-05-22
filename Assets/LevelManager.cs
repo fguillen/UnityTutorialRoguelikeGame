@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
   {
     PlayerController.instance.SetCanMove(false);
     AudioManager.instance.PlayWinMusic();
+    UIController.instance.FadeToBlack();
 
     yield return new WaitForSeconds(secondsToWait);
 

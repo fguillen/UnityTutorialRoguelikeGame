@@ -12,6 +12,12 @@ public class UIController : MonoBehaviour
   private int maxHealth;
   private int currentHealth;
 
+  // FadeOut
+  public Image fadeOutImage;
+  public float fadeOutSeconds = 1f;
+  private bool fadeToBlack = false;
+  private bool fadeOutBlack = true;
+
   private void Awake()
   {
     instance = this;
@@ -50,6 +56,35 @@ public class UIController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-        
+    Fading();
+  }
+
+  public void FadeToBlack()
+  {
+    fadeToBlack = true;
+    fadeOutBlack = false;
+  }
+
+  void Fading()
+  {
+    if (fadeToBlack)
+    {
+      fadeOutImage.color = new Color(fadeOutImage.color.r, fadeOutImage.color.g, fadeOutImage.color.b, Mathf.MoveTowards(fadeOutImage.color.a, 1f, fadeOutSeconds * Time.deltaTime));
+
+      if(fadeOutImage.color.a >= 1f)
+      {
+        fadeToBlack = false;
+      }
+    }
+
+    if (fadeOutBlack)
+    {
+      fadeOutImage.color = new Color(fadeOutImage.color.r, fadeOutImage.color.g, fadeOutImage.color.b, Mathf.MoveTowards(fadeOutImage.color.a, 0f, fadeOutSeconds * Time.deltaTime));
+
+      if (fadeOutImage.color.a <= 0f)
+      {
+        fadeOutBlack = false;
+      }
+    }
   }
 }
