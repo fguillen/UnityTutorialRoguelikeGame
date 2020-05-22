@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UIController : MonoBehaviour
   public Text healthText;
   private int maxHealth;
   private int currentHealth;
+  public string startAgainScene;
+  public string mainMenuScene;
 
   // FadeOut
   public Image fadeOutImage;
@@ -86,5 +89,15 @@ public class UIController : MonoBehaviour
         fadeOutBlack = false;
       }
     }
+  }
+
+  public void StartAgain()
+  {
+    SceneManager.LoadScene(startAgainScene);
+  }
+
+  public void MainMenu()
+  {
+    SceneManager.LoadScene(mainMenuScene);
   }
 }
