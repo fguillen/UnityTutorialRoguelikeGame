@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
 
   public IEnumerator LevelEnd()
   {
+    PlayerController.instance.SetCanMove(false);
     AudioManager.instance.PlayWinMusic();
 
     yield return new WaitForSeconds(secondsToWait);

@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
   // invincible
   private float invincibleCounter = 0f;
+
+  private bool canMove = true;
   
 
   private void Awake()
@@ -192,6 +194,11 @@ public class PlayerController : MonoBehaviour
 
   public Vector2 MoveDirection()
   {
+    if (!canMove)
+    {
+      return Vector2.zero;
+    }
+
     Vector2 moveInput = new Vector2();
     moveInput.x = Input.GetAxisRaw("Horizontal");
     moveInput.y = Input.GetAxisRaw("Vertical");
@@ -258,5 +265,10 @@ public class PlayerController : MonoBehaviour
         RemoveInvicible();
       }
     }
+  }
+
+  public void SetCanMove(bool value)
+  {
+    canMove = value;
   }
 }
