@@ -153,8 +153,7 @@ public class PlayerController : MonoBehaviour
   private bool DashButtonDown()
   {
     return (
-      Input.GetKey(KeyCode.Space) ||
-      Input.GetKey(KeyCode.C) ||
+      Input.GetKey(KeyCode.D) ||
       gamepad.leftShoulder.wasPressedThisFrame
     );
   }
