@@ -70,9 +70,9 @@ public class PlayerController : MonoBehaviour
       Debug.Log("Pad found: " + gamepad);
     }
 
-    if (gamepad.rightTrigger.wasPressedThisFrame)
+    if (gamepad.rightShoulder.wasPressedThisFrame)
     {
-      Debug.Log("gamepad.rightTrigger.wasPressedThisFrame");
+      Debug.Log("gamepad.rightShoulder.wasPressedThisFrame");
     }
 
     Vector2 move = gamepad.leftStick.ReadValue();
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
     return (
       Input.GetMouseButtonDown(0) ||
       Input.GetKeyDown(KeyCode.Space) ||
-      gamepad.rightTrigger.wasPressedThisFrame
+      gamepad.rightShoulder.wasPressedThisFrame
     );
   }
 
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
     return (
       Input.GetMouseButton(0) ||
       Input.GetKey(KeyCode.Space) ||
-      gamepad.rightTrigger.isPressed
+      gamepad.rightShoulder.isPressed
     );
   }
 
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
     return (
       Input.GetKey(KeyCode.Space) ||
       Input.GetKey(KeyCode.C) ||
-      gamepad.leftTrigger.wasPressedThisFrame
+      gamepad.leftShoulder.wasPressedThisFrame
     );
   }
 
