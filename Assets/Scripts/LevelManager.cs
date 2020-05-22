@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
   public static LevelManager instance;
   public string sceneToLoad;
   public float secondsToWait = 4f;
+  public bool isPaused = false;  
+
 
   private void Awake()
   {
@@ -23,7 +25,10 @@ public class LevelManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-        
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      PauseToogle();
+    }
   }
 
   public IEnumerator LevelEnd()
@@ -35,6 +40,21 @@ public class LevelManager : MonoBehaviour
     yield return new WaitForSeconds(secondsToWait);
 
     SceneManager.LoadScene(sceneToLoad);
+  }
+
+  public void PauseToogle()
+  {
+    isPaused = !isPaused;
+
+    if (isPaused)
+    {
+      UIController.instance.pauseScreen.SetActive(true);
+      Time.timeScale = 0f;
+    } else
+    {
+      UIController.instance.pauseScreen.SetActive(false);
+      Time.timeScale = 1f;
+    }
   }
 
 }

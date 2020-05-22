@@ -21,6 +21,9 @@ public class UIController : MonoBehaviour
   private bool fadeToBlack = false;
   private bool fadeOutBlack = true;
 
+  // Pause Screen
+  public GameObject pauseScreen;
+
   private void Awake()
   {
     instance = this;
@@ -89,6 +92,11 @@ public class UIController : MonoBehaviour
         fadeOutBlack = false;
       }
     }
+  }
+
+  public void Resume()
+  {
+    LevelManager.instance.PauseToogle();
   }
 
   public void StartAgain()

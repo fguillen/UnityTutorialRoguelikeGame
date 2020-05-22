@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     theCam = Camera.main;
     moveDirection = Vector2.zero;
     currentSpeed = moveSpeed;
+    Time.timeScale = 1f;
   }
 
   public bool IsDashing()
