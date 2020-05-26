@@ -17,6 +17,7 @@ public class LevelGenerator : MonoBehaviour
   private GameObject firstRoom;
   private GameObject lastRoom;
   private List<GameObject> rooms = new List<GameObject>();
+  public RoomsPrefabs roomsPrefabs;
 
   // Start is called before the first frame update
   void Start()
@@ -98,4 +99,24 @@ public class LevelGenerator : MonoBehaviour
   Direction NewDirection() {
     return (Direction)Random.Range(0, 4);
   }
+}
+
+[System.Serializable]
+public class RoomsPrefabs
+{
+  public GameObject roomR;
+  public GameObject roomU;
+  public GameObject roomL;
+  public GameObject roomD;
+  public GameObject roomRL;
+  public GameObject roomUD;
+  public GameObject roomUR;
+  public GameObject roomRD;
+  public GameObject roomDL;
+  public GameObject roomUL;
+  public GameObject roomURDL;
+  public GameObject roomURL;
+  public GameObject roomUDL;
+  public GameObject roomRDL;
+  public GameObject roomURD;
 }
