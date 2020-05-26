@@ -156,6 +156,9 @@ MonoBehaviour:
   lastRoomColor: {r: 0.79757595, g: 0, b: 1, a: 1}
   generatorPoint: {fileID: 1318383403}
   numOfRooms: 10
+  roomLayer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!4 &870226909
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class LevelGenerator : MonoBehaviour
   public int numOfRooms;
   private float xOffset = 18;
   private float yOffset = 10;
+  public LayerMask roomLayer;
 
   // Start is called before the first frame update
   void Start()
@@ -22,7 +23,20 @@ public class LevelGenerator : MonoBehaviour
     for (int i = 0; i < numOfRooms; i++)
     {
       var direction = NewDirection();
-      GenerateRoom(direction);
+
+      MoveGeneratorPoint(direction);
+
+      while (IsNewPositionTaken())
+      {
+        MoveGeneratorPoint(direction);
+      }
+
+      GameObject newRoom = GenerateRoom();
+
+      if(i == numOfRooms - 1)
+      {
+        newRoom.GetComponent<SpriteRenderer>().color = lastRoomColor;
+      }
     }
   }
 
@@ -35,7 +49,17 @@ public class LevelGenerator : MonoBehaviour
     }
   }
 
-  void GenerateRoom(Direction direction)
+  bool IsNewPositionTaken()
+  {
+    return (Physics2D.OverlapCircle(generatorPoint.position, .2f, roomLayer));
+  }
+
+  GameObject GenerateRoom()
+  {
+    return Instantiate(templateRoom, generatorPoint.position, generatorPoint.rotation);
+  }
+
+  void MoveGeneratorPoint(Direction direction)
   {
     switch (direction)
     {
@@ -55,8 +79,6 @@ public class LevelGenerator : MonoBehaviour
         generatorPoint.position += new Vector3(-xOffset, 0f, 0f);
         break;
     }
-
-    Instantiate(templateRoom, generatorPoint.position, generatorPoint.rotation);
   }
 
   Direction NewDirection() {

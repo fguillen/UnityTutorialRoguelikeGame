@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerBullet
+  - RoomLayouts
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - EnemyBullet
   - Breakable
   - IgnoreBullets
-  - 
+  - RoomLayout
   - 
   - 
   - 
