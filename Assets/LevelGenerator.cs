@@ -14,11 +14,29 @@ public class LevelGenerator : MonoBehaviour
   private float xOffset = 18;
   private float yOffset = 10;
   public LayerMask roomLayer;
+  private GameObject firstRoom;
+  private GameObject lastRoom;
+  private List<GameObject> rooms = new List<GameObject>();
 
   // Start is called before the first frame update
   void Start()
   {
-    Instantiate(templateRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = firstRoomColor;
+    GenerateRooms();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    if (Input.GetKey(KeyCode.Space))
+    {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+  }
+
+  void GenerateRooms()
+  {
+    firstRoom = Instantiate(templateRoom, generatorPoint.position, generatorPoint.rotation);
+    firstRoom.GetComponent<SpriteRenderer>().color = firstRoomColor;
 
     for (int i = 0; i < numOfRooms; i++)
     {
@@ -33,19 +51,15 @@ public class LevelGenerator : MonoBehaviour
 
       GameObject newRoom = GenerateRoom();
 
-      if(i == numOfRooms - 1)
+      if (i == numOfRooms - 1)
       {
-        newRoom.GetComponent<SpriteRenderer>().color = lastRoomColor;
+        lastRoom = newRoom;
+        lastRoom.GetComponent<SpriteRenderer>().color = lastRoomColor;
       }
-    }
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-    if (Input.GetKey(KeyCode.Space))
-    {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+      else
+      {
+        rooms.Add(newRoom);
+      }
     }
   }
 
