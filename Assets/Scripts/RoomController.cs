@@ -5,12 +5,12 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
   public bool closeWhenEnter = true;
-  
+
   public bool isActive = false;
   public bool doorsOpen = true;
 
   public GameObject[] doors;
-  
+
 
   // Start is called before the first frame update
   void Start()
@@ -21,7 +21,7 @@ public class RoomController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    
+
   }
 
 
@@ -68,6 +68,8 @@ public class RoomController : MonoBehaviour
 
   public void OpenDoors()
   {
+    Debug.Log("XXX: OpenDoors");
+
     foreach (GameObject door in doors)
     {
       door.SetActive(false);

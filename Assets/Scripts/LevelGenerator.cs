@@ -37,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKey(KeyCode.Space))
+    if (Input.GetKey(KeyCode.R))
     {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

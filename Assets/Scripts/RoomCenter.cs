@@ -17,7 +17,7 @@ public class RoomCenter : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    CheckEnemiesForOpenDoors();  
+    CheckEnemiesForOpenDoors();
   }
 
   void CheckEnemiesForOpenDoors()
@@ -31,11 +31,11 @@ public class RoomCenter : MonoBehaviour
           enemies.RemoveAt(i);
           i--;
         }
+      }
 
-        if (enemies.Count == 0)
-        {
-          theRoom.OpenDoors();
-        }
+      if (enemies.Count == 0)
+      {
+        theRoom.OpenDoors();
       }
     }
   }

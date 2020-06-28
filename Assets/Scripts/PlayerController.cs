@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
   private float invincibleCounter = 0f;
 
   private bool canMove = true;
-  
+
 
   private void Awake()
   {
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
 
     // rotate gum arm
-    
+
     float angle = Mathf.Atan2(gunDirection.y, gunDirection.x) * Mathf.Rad2Deg;
 
     gunArm.rotation = Quaternion.Euler(0, 0, angle);
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
     {
       anim.SetBool("isMoving", false);
     }
- 
+
   }
 
   private bool ShootButtonDown()
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     return (
       Input.GetMouseButtonDown(0) ||
       Input.GetKeyDown(KeyCode.Space) ||
-      gamepad.rightShoulder.wasPressedThisFrame
+      (gamepad != null && gamepad.rightShoulder.wasPressedThisFrame)
     );
   }
 
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
     return (
       Input.GetMouseButton(0) ||
       Input.GetKey(KeyCode.Space) ||
-      gamepad.rightShoulder.isPressed
+      (gamepad != null && gamepad.rightShoulder.isPressed)
     );
   }
 
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
   {
     return (
       Input.GetKey(KeyCode.D) ||
-      gamepad.leftShoulder.wasPressedThisFrame
+      (gamepad != null && gamepad.leftShoulder.wasPressedThisFrame)
     );
   }
 
@@ -213,8 +213,7 @@ public class PlayerController : MonoBehaviour
     if (controller == "mouse")
     {
       return GunDirectionMouseController();
-    }
-    else if (controller == "cursor")
+    } else if (controller == "cursor")
     {
       return MoveDirection();
     } else if (controller == "pad")
