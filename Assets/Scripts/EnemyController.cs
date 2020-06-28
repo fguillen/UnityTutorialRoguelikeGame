@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
   private float fireCounter;
   public SpriteRenderer theBody;
   public float rangeShoot;
+  public string enemyKind;
 
   // Start is called before the first frame update
   void Start()
@@ -31,29 +32,9 @@ public class EnemyController : MonoBehaviour
   {
     if (theBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
     {
-      // Chasing
-      if (distanceToPlayer() < rangeToChasePlayer)
-      {
-        moveDirection = PlayerController.instance.transform.position - transform.position;
-
-        // flip
-        if (PlayerController.instance.transform.position.x < transform.position.x)
-        {
-          transform.localScale = Vector3.one;
-        }
-        else
-        {
-          transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-
-      }
-      else
-      {
-        moveDirection = Vector3.zero;
-      }
-
-      moveDirection.Normalize();
+      moveDirection = CalculateMoveDirection();
       theRB.velocity = moveDirection * moveSpeed;
+      Flip();
 
       // Shooting
       if (shouldShoot && (distanceToPlayer() < rangeShoot))
@@ -81,6 +62,64 @@ public class EnemyController : MonoBehaviour
     {
       anim.SetBool("isMoving", false);
     }
+  }
+
+  void Flip() {
+    if (PlayerController.instance.transform.position.x < transform.position.x)
+    {
+      transform.localScale = Vector3.one;
+    }
+    else
+    {
+      transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+  }
+
+  Vector3 CalculateMoveDirection()
+  {
+    switch (enemyKind)
+    {
+      case "skeleton":
+        return CalculateMoveDirectionForSkeleton();
+      case "coward":
+        return CalculateMoveDirectionForCoward();
+      default:
+        throw new System.ArgumentException("Not valid enemyKind", "enemyKind");
+    }
+  }
+
+  Vector3 CalculateMoveDirectionForSkeleton()
+  {
+    // Chasing
+    if (distanceToPlayer() < rangeToChasePlayer)
+    {
+      moveDirection = PlayerController.instance.transform.position - transform.position;
+    }
+    else
+    {
+      moveDirection = Vector3.zero;
+    }
+
+    moveDirection.Normalize();
+
+    return moveDirection;
+  }
+
+  Vector3 CalculateMoveDirectionForCoward()
+  {
+    // Running away
+    if (distanceToPlayer() < rangeToChasePlayer)
+    {
+      moveDirection = transform.position - PlayerController.instance.transform.position;
+    }
+    else
+    {
+      moveDirection = Vector3.zero;
+    }
+
+    moveDirection.Normalize();
+
+    return moveDirection;
   }
 
   private float distanceToPlayer()
