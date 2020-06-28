@@ -31,6 +31,7 @@ public class LevelGenerator : MonoBehaviour
   {
     GenerateRooms();
     GenerateAllRoomBorders();
+    GenerateAllRoomCenters();
   }
 
   // Update is called once per frame
@@ -86,6 +87,35 @@ public class LevelGenerator : MonoBehaviour
     {
       roomBorders.Add(GenerateRoomBorders(room));
     }
+  }
+
+  void GenerateAllRoomCenters()
+  {
+    foreach(GameObject roomBorder in roomBorders)
+    {
+      GenerateRoomCenter(roomBorder);
+    }
+  }
+
+  void GenerateRoomCenter(GameObject roomBorder)
+  {
+    RoomCenter roomCenterSelected;
+
+    if(roomBorder == roomBorders[0])
+    {
+      roomCenterSelected = roomCenterStart;
+    }
+    else if(roomBorder == roomBorders[roomBorders.Count - 1])
+    {
+      roomCenterSelected = roomCenterEnd;
+    }
+    else
+    {
+      roomCenterSelected = roomCenters[Random.Range(0, roomCenters.Length)];
+    }
+
+    RoomCenter newRoomCenter = (RoomCenter)Instantiate(roomCenterSelected, roomBorder.transform.position, roomBorder.transform.rotation);
+    newRoomCenter.theRoom = roomBorder.GetComponent<RoomController>();
   }
 
   GameObject GenerateRoomBorders(GameObject room)

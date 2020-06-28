@@ -191,7 +191,6 @@ MonoBehaviour:
     type: 3}
   roomCenters:
   - {fileID: 1396858266410134531, guid: d2b00feb9c4a642a9a9b50892aead7e8, type: 3}
-  - {fileID: 2560240893513190109, guid: d3220072085734f78b2cfecc9816e1c2, type: 3}
   - {fileID: 3341855651015197062, guid: 67e5706d7c56042519431ead83ea05ae, type: 3}
 --- !u!4 &870226909
 Transform:
