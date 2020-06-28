@@ -5,12 +5,12 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
   public bool closeWhenEnter = true;
-  public bool openWhenEnemiesDeath = true;
+  
   public bool isActive = false;
   public bool doorsOpen = true;
 
   public GameObject[] doors;
-  public List<GameObject> enemies = new List<GameObject>();
+  
 
   // Start is called before the first frame update
   void Start()
@@ -21,28 +21,9 @@ public class RoomController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    CheckEnemiesForOpenDoors();
+    
   }
 
-  void CheckEnemiesForOpenDoors()
-  {
-    if(!doorsOpen && openWhenEnemiesDeath && isActive)
-    {
-      for (int i = 0; i < enemies.Count; i++)
-      {
-        if(enemies[i] ==  null)
-        {
-          enemies.RemoveAt(i);
-          i--;
-        }
-
-        if(enemies.Count == 0)
-        {
-          OpenDoors();
-        }
-      }
-    }
-  }
 
   private void OnTriggerEnter2D(Collider2D other)
   {
@@ -85,7 +66,7 @@ public class RoomController : MonoBehaviour
     doorsOpen = false;
   }
 
-  private void OpenDoors()
+  public void OpenDoors()
   {
     foreach (GameObject door in doors)
     {

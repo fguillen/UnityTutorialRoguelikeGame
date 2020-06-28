@@ -20,6 +20,12 @@ public class LevelGenerator : MonoBehaviour
   private List<GameObject> roomBorders = new List<GameObject>();
   public RoomsPrefabs roomsPrefabs;
 
+  // Centers
+  public RoomCenter roomCenterStart;
+  public RoomCenter roomCenterEnd;
+  public RoomCenter[] roomCenters;
+
+
   // Start is called before the first frame update
   void Start()
   {
