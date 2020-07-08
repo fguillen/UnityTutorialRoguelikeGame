@@ -21,11 +21,15 @@ public class EnemyController : MonoBehaviour
   public float rangeShoot;
   public string enemyKind;
 
-  // Wander
+  [Header("Wander")]
   public float wanderTime;
   private float wanderCounter;
   public float wanderPauseTime;
   private float wanderPauseCounter;
+
+  [Header("Patrol")]
+  public Transform[] patrolPoints;
+  public int actualPatrolPoint = 0;
 
   // Start is called before the first frame update
   void Start()
@@ -93,9 +97,40 @@ public class EnemyController : MonoBehaviour
         return CalculateMoveDirectionForCoward();
       case "wander":
         return CalculateMoveDirectionForWander();
+      case "patrol":
+        return CalculateMoveDirectionForPatrol();
       default:
         throw new System.ArgumentException("Not valid enemyKind", "enemyKind");
     }
+  }
+
+  Vector3 CalculateMoveDirectionForPatrol()
+  {
+    Vector3 direction = moveDirection;
+
+    // Chasing
+    if (distanceToPlayer() < rangeToChasePlayer)
+    {
+      direction = PlayerController.instance.transform.position - transform.position;
+    }
+    else
+    {
+      Transform patrolPoint = patrolPoints[actualPatrolPoint];
+
+      if(Vector3.Distance(transform.position, patrolPoint.position) < 0.1f) {
+        actualPatrolPoint++;
+
+        if(actualPatrolPoint == patrolPoints.Length){
+          actualPatrolPoint = 0;
+        }
+      }
+
+      direction = patrolPoint.position - transform.position;
+    }
+
+    direction.Normalize();
+
+    return direction;
   }
 
   Vector3 CalculateMoveDirectionForWander()
