@@ -21,10 +21,18 @@ public class EnemyController : MonoBehaviour
   public float rangeShoot;
   public string enemyKind;
 
+  // Wander
+  public float wanderTime;
+  private float wanderCounter;
+  public float wanderPauseTime;
+  private float wanderPauseCounter;
+
   // Start is called before the first frame update
   void Start()
   {
-
+    if(enemyKind == "wander"){
+      wanderPauseCounter = Random.Range(wanderPauseTime * 0.75f, wanderPauseTime * 1.25f);
+    }
   }
 
   // Update is called once per frame
@@ -83,9 +91,48 @@ public class EnemyController : MonoBehaviour
         return CalculateMoveDirectionForSkeleton();
       case "coward":
         return CalculateMoveDirectionForCoward();
+      case "wander":
+        return CalculateMoveDirectionForWander();
       default:
         throw new System.ArgumentException("Not valid enemyKind", "enemyKind");
     }
+  }
+
+  Vector3 CalculateMoveDirectionForWander()
+  {
+    Vector3 direction = moveDirection;
+
+        // Chasing
+    if (distanceToPlayer() < rangeToChasePlayer)
+    {
+      direction = PlayerController.instance.transform.position - transform.position;
+      direction.Normalize();
+    }
+    else
+    {
+      if(wanderCounter > 0){
+        wanderCounter -= Time.deltaTime;
+
+        if(wanderCounter <= 0){
+          wanderPauseCounter = Random.Range(wanderPauseTime * 0.75f, wanderPauseTime * 1.25f);
+        }
+      }
+
+      if(wanderPauseCounter > 0){
+        wanderPauseCounter -= Time.deltaTime;
+
+        if(wanderPauseCounter <= 0){
+          direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+          direction.Normalize();
+
+          wanderCounter = Random.Range(wanderTime * 0.75f, wanderTime * 1.25f);
+        } else {
+          direction = Vector3.zero;
+        }
+      }
+    }
+
+    return direction;
   }
 
   Vector3 CalculateMoveDirectionForSkeleton()
