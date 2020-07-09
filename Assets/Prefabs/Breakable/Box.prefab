@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -59,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -130,7 +132,9 @@ MonoBehaviour:
   pickupsToDrop:
   - {fileID: 8757826085624143656, guid: ef1e22bdc44ff4a90b7cc51aa6630d55, type: 3}
   - {fileID: 7656501240909027998, guid: 4c826c91b855a4e56b03696c332555cb, type: 3}
-  percentageOfChancesToDrop: 0.2
+  - {fileID: 6306902354446129420, guid: 970d24bbe85cf443ba389c45a2acc185, type: 3}
+  - {fileID: 6306902354446129420, guid: 970d24bbe85cf443ba389c45a2acc185, type: 3}
+  percentageOfChancesToDrop: 0.5
   health: 2
 --- !u!114 &114838565363769720
 MonoBehaviour:

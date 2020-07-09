@@ -100,6 +100,11 @@ MonoBehaviour:
   enemyKind: wander
   wanderTime: 2
   wanderPauseTime: 1.5
+  patrolPoints: []
+  actualPatrolPoint: 0
+  pickupsToDrop:
+  - {fileID: 6306902354446129420, guid: 970d24bbe85cf443ba389c45a2acc185, type: 3}
+  percentageOfChancesToDrop: 0.5
 --- !u!61 &7819409490034271985
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -68,6 +68,13 @@ MonoBehaviour:
   theBody: {fileID: 4309702471694832223}
   rangeShoot: 10
   enemyKind: coward
+  wanderTime: 0
+  wanderPauseTime: 0
+  patrolPoints: []
+  actualPatrolPoint: 0
+  pickupsToDrop:
+  - {fileID: 6306902354446129420, guid: 970d24bbe85cf443ba389c45a2acc185, type: 3}
+  percentageOfChancesToDrop: 0.5
 --- !u!61 &4309702470439790338
 BoxCollider2D:
   m_ObjectHideFlags: 0

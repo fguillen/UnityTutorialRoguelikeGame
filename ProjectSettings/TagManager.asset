@@ -51,6 +51,9 @@ TagManager:
   - name: Objects
     uniqueID: 4097662165
     locked: 0
+  - name: EnemiesSplatter
+    uniqueID: 888265031
+    locked: 0
   - name: Pickups
     uniqueID: 4275866107
     locked: 0

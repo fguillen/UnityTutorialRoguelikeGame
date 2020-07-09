@@ -107,6 +107,9 @@ MonoBehaviour:
   - {fileID: 5334427250606241845}
   - {fileID: 5334427250989981620}
   actualPatrolPoint: 0
+  pickupsToDrop:
+  - {fileID: 6306902354446129420, guid: 970d24bbe85cf443ba389c45a2acc185, type: 3}
+  percentageOfChancesToDrop: 0.5
 --- !u!61 &368161226020503007
 BoxCollider2D:
   m_ObjectHideFlags: 0

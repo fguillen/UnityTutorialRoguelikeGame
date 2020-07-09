@@ -31,6 +31,10 @@ public class EnemyController : MonoBehaviour
   public Transform[] patrolPoints;
   public int actualPatrolPoint = 0;
 
+  [Header("Pickups")]
+  public GameObject[] pickupsToDrop;
+  public float percentageOfChancesToDrop;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -233,5 +237,21 @@ public class EnemyController : MonoBehaviour
     int rotationIndex = Random.Range(0, 4);
 
     Instantiate(deathSplatters[deathSplatterIndex], transform.position, Quaternion.Euler(0f, 0f, 90F * rotationIndex));
+
+    DropPickup();
+  }
+
+  private void DropPickup()
+  {
+    float chances = Random.Range(0f, 1f);
+    bool dropPickup = (chances < percentageOfChancesToDrop);
+
+    if (dropPickup)
+    {
+      int pickupIndex = Random.Range(0, pickupsToDrop.Length);
+      GameObject pickup = pickupsToDrop[pickupIndex];
+
+      Instantiate(pickup, transform.position, transform.rotation);
+    }
   }
 }

@@ -12,13 +12,13 @@ public class BreakableController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-        
+
   }
 
   // Update is called once per frame
   void Update()
   {
-        
+
   }
 
   private void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +26,7 @@ public class BreakableController : MonoBehaviour
     if (other.CompareTag("Player") && PlayerController.instance.IsDashing())
     {
       Break();
-      
+
     } else if (other.CompareTag("PlayerBullet"))
     {
       health--;
