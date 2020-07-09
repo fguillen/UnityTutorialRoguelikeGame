@@ -8,7 +8,9 @@ public class LevelManager : MonoBehaviour
   public static LevelManager instance;
   public string sceneToLoad;
   public float secondsToWait = 4f;
-  public bool isPaused = false;  
+  public bool isPaused = false;
+
+  public int coins = 0;
 
 
   private void Awake()
@@ -19,7 +21,7 @@ public class LevelManager : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-        
+
   }
 
   // Update is called once per frame
@@ -54,6 +56,23 @@ public class LevelManager : MonoBehaviour
     {
       UIController.instance.pauseScreen.SetActive(false);
       Time.timeScale = 1f;
+    }
+  }
+
+  public void GetCoins(int amount)
+  {
+    Debug.Log("GetCoins: " + amount);
+    coins += amount;
+    Debug.Log("coins: " + amount);
+  }
+
+  public void SpendCoins(int amount)
+  {
+    coins -= amount;
+
+    if(coins < 0)
+    {
+      Debug.Log("Error: Coins amount is negative:" + coins);
     }
   }
 
