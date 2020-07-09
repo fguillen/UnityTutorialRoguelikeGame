@@ -15,6 +15,9 @@ public class UIController : MonoBehaviour
   public string startAgainScene;
   public string mainMenuScene;
 
+  // Coins
+  public Text coinsText;
+
   // FadeOut
   public Image fadeOutImage;
   public float fadeOutSeconds = 1f;
@@ -41,6 +44,10 @@ public class UIController : MonoBehaviour
     renderHealth();
   }
 
+  public void SetCurrentCoins(int amount){
+    coinsText.text = amount.ToString();
+  }
+
   public void ActivateDeathScreen()
   {
     deathScreen.SetActive(true);
@@ -56,7 +63,7 @@ public class UIController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-        
+
   }
 
   // Update is called once per frame

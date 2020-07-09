@@ -61,9 +61,9 @@ public class LevelManager : MonoBehaviour
 
   public void GetCoins(int amount)
   {
-    Debug.Log("GetCoins: " + amount);
     coins += amount;
-    Debug.Log("coins: " + amount);
+
+    UIController.instance.SetCurrentCoins(coins);
   }
 
   public void SpendCoins(int amount)
@@ -74,6 +74,8 @@ public class LevelManager : MonoBehaviour
     {
       Debug.Log("Error: Coins amount is negative:" + coins);
     }
+
+    UIController.instance.SetCurrentCoins(coins);
   }
 
 }
