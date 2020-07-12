@@ -25,12 +25,12 @@ public class PlayerHealthController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    
+
   }
 
   public void DamagePlayer()
   {
-    
+
 
     if (!PlayerController.instance.IsInvincible())
     {
@@ -64,6 +64,15 @@ public class PlayerHealthController : MonoBehaviour
       currenHealth = maxHealth;
     }
 
+    UIController.instance.SetCurrentHealth(currenHealth);
+  }
+
+  public void UpgradeHealth(int amount)
+  {
+    maxHealth += amount;
+    currenHealth = maxHealth;
+
+    UIController.instance.SetMaxHealth(maxHealth);
     UIController.instance.SetCurrentHealth(currenHealth);
   }
 }
