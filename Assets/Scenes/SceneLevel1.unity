@@ -316,7 +316,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1296279339
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300030, guid: a47294d8f066c634d90ee371916313ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -397,7 +397,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1296279339
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a47294d8f066c634d90ee371916313ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -749,6 +749,47 @@ PrefabInstance:
       propertyPath: roomCenters.Array.data[5]
       value: 
       objectReference: {fileID: 4706571961919104034, guid: a1aec1c63c6ae4d8b83c4a8fb577cdc8,
+        type: 3}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomIndexMin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomIndexMax
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: hasShopRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomColor.g
+      value: 0.9479667
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: shopRoomColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497410494030804710, guid: 078150d9196bd4814a170c5a80587436,
+        type: 3}
+      propertyPath: roomCenterShop
+      value: 
+      objectReference: {fileID: 8221112127324399732, guid: 389127ca2364d4cef82558829449d7a0,
         type: 3}
     - target: {fileID: 7497410494030804711, guid: 078150d9196bd4814a170c5a80587436,
         type: 3}
@@ -3640,7 +3681,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1296279339
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3975,7 +4016,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1296279339
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300032, guid: a47294d8f066c634d90ee371916313ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
   public GameObject templateRoom;
   public Color firstRoomColor;
   public Color lastRoomColor;
+  public Color shopRoomColor;
   public Transform generatorPoint;
   private enum Direction {up, right, down, left};
   public int numOfRooms;
@@ -16,13 +17,22 @@ public class LevelGenerator : MonoBehaviour
   public LayerMask roomLayer;
   private GameObject firstRoom;
   private GameObject lastRoom;
+  private GameObject shopRoom;
   private List<GameObject> rooms = new List<GameObject>();
   private List<GameObject> roomBorders = new List<GameObject>();
   public RoomsPrefabs roomsPrefabs;
 
-  // Centers
+  // Shop Room
+  [Header("Shop Room")]
+  public bool hasShopRoom;
+  private int shopRoomIndex;
+  public int shopRoomIndexMin;
+  public int shopRoomIndexMax;
+
+  [Header("Room Centers")]
   public RoomCenter roomCenterStart;
   public RoomCenter roomCenterEnd;
+  public RoomCenter roomCenterShop;
   public RoomCenter[] roomCenters;
 
 
@@ -47,6 +57,10 @@ public class LevelGenerator : MonoBehaviour
   {
     firstRoom = Instantiate(templateRoom, generatorPoint.position, generatorPoint.rotation);
     firstRoom.GetComponent<SpriteRenderer>().color = firstRoomColor;
+    if(hasShopRoom)
+    {
+      shopRoomIndex = Random.Range(shopRoomIndexMin, shopRoomIndexMax + 1);
+    }
 
     for (int i = 0; i < numOfRooms; i++)
     {
@@ -61,7 +75,12 @@ public class LevelGenerator : MonoBehaviour
 
       GameObject newRoom = GenerateRoom();
 
-      if (i == numOfRooms - 1)
+      if(hasShopRoom && (i == shopRoomIndex))
+      {
+        shopRoom = newRoom;
+        shopRoom.GetComponent<SpriteRenderer>().color = shopRoomColor;
+      }
+      else if (i == numOfRooms - 1)
       {
         lastRoom = newRoom;
         lastRoom.GetComponent<SpriteRenderer>().color = lastRoomColor;
@@ -82,6 +101,7 @@ public class LevelGenerator : MonoBehaviour
   {
     roomBorders.Add(GenerateRoomBorders(firstRoom));
     roomBorders.Add(GenerateRoomBorders(lastRoom));
+    roomBorders.Add(GenerateRoomBorders(shopRoom));
 
     foreach (var room in rooms)
     {
@@ -108,6 +128,10 @@ public class LevelGenerator : MonoBehaviour
     else if(roomBorder == roomBorders[roomBorders.Count - 1])
     {
       roomCenterSelected = roomCenterEnd;
+    }
+    else if(roomBorder == roomBorders[shopRoomIndex])
+    {
+      roomCenterSelected = roomCenterShop;
     }
     else
     {
