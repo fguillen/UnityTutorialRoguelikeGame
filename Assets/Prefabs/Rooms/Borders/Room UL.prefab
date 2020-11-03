@@ -1195,7 +1195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8700985830864970713}
   - component: {fileID: 8700985830864970712}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
